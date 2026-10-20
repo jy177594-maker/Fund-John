@@ -1,85 +1,209 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fun Zone - मज़े की दुनिया</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>जय हिंद यादव | Masti Zone</title>
+<meta name="description" content="जय हिंद यादव की मजेदार वेबसाइट">
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#101124;color:white}
-header{background:#6c3cff;padding:22px 15px;text-align:center}
-header h1{margin:0;font-size:30px}
-header p{margin-bottom:0}
-main{max-width:650px;margin:auto;padding:18px}
-h2{color:#ffd166}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:#222442;border-radius:15px;padding:18px 10px;text-align:center}
-.card a{display:block;color:white;text-decoration:none;font-size:17px}
-.emoji{font-size:35px;margin-bottom:10px}
-button{background:#6c3cff;color:white;border:0;padding:12px 18px;border-radius:9px;font-size:16px}
-#result{background:#222442;padding:20px;border-radius:12px;margin-top:15px;text-align:center}
-footer{text-align:center;padding:25px;color:#bbb}
+body{margin:0;font-family:Arial,sans-serif;color:white;background:linear-gradient(135deg,#ff0080,#7928ca,#00b4d8,#00c896);background-size:400% 400%;animation:bg 12s ease infinite;min-height:100vh}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+header{text-align:center;background:#19082dcc;padding:24px 10px}
+.brand{font-size:clamp(25px,6vw,40px);font-weight:bold;background:linear-gradient(90deg,#ffeb3b,#fff,#00ffff,#ffeb3b);background-size:250%;color:transparent;background-clip:text;-webkit-background-clip:text;animation:shine 3s linear infinite}
+@keyframes shine{to{background-position:250%}}
+h2{font-size:26px}
+main{max-width:750px;margin:auto;padding:14px}
+.card{background:#19082ddd;border:1px solid #ffffff55;border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 8px 25px #20002f55}
+h3{color:#ffe66d;margin-top:0;font-size:22px}
+button{border:0;border-radius:25px;padding:12px 16px;margin:5px 2px;font-size:15px;font-weight:bold;background:#ffe66d;color:#321044;cursor:pointer}
+.wa{background:#25d366;color:#07351b}
+.pink{background:#ff3993;color:white}
+input{width:100%;padding:13px;border-radius:10px;border:0;margin:7px 0;font-size:16px}
+.result{background:#ffffff20;padding:13px;border-radius:12px;margin:10px 0;overflow-wrap:anywhere}
+footer{text-align:center;padding:24px;background:#19082dcc}
+.bubble{position:fixed;pointer-events:none;z-index:100;border:2px solid white;border-radius:50%;animation:up 1.7s forwards}
+@keyframes up{0%{opacity:0;transform:scale(.2)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),-220px) scale(1.3)}}
+#adminPanel{display:none}
+.small{font-size:13px;line-height:1.6}
 </style>
 </head>
 <body>
+
 <header>
-<h1>🎉 FUN ZONE 🎉</h1>
-<p>मज़े करो, हँसो और दोस्तों के साथ शेयर करो!</p>
+  <div class="brand">✨ जय हिंद यादव ✨</div>
+  <p>🔥 आपका अपना Masti Zone 🔥</p>
+  <button class="wa" onclick="shareSite()">📲 WhatsApp शेयर</button>
+  <button class="pink" onclick="document.getElementById('admin').scrollIntoView()">🔐 Admin Panel</button>
 </header>
+
 <main>
-<h2>🔥 आज क्या ट्राई करोगे?</h2>
-<div class="grid">
-<div class="card"><div class="emoji">😂</div><a href="#jokes">मज़ेदार जोक्स</a></div>
-<div class="card"><div class="emoji">🧠</div><a href="#quiz">दिमागी क्विज़</a></div>
-<div class="card"><div class="emoji">🎲</div><a href="#lucky">लकी नंबर</a></div>
-<div class="card"><div class="emoji">💬</div><a href="#quotes">मोटिवेशन</a></div>
+<section class="card" style="text-align:center">
+  <h2>🌈 मस्ती की रंगीन दुनिया 🌈</h2>
+  <p>स्क्रीन छुओ और रंगीन बबल उड़ाओ! अपने दोस्तों के साथ मजे करो।</p>
+  <button onclick="burst(innerWidth/2,innerHeight/2,25)">🫧 बबल उड़ाओ!</button>
+</section>
+
+<section class="card">
+<h3>💖 दोस्ती टेस्ट</h3>
+<input id="n1" placeholder="अपना नाम">
+<input id="n2" placeholder="दोस्त का नाम">
+<button onclick="friend()">दोस्ती स्कोर निकालो</button>
+<div class="result" id="friendResult">रिजल्ट यहाँ आएगा 😍</div>
+<button class="wa" onclick="shareResult('friendResult')">WhatsApp पर शेयर करें</button>
+</section>
+
+<section class="card">
+<h3>😂 मजेदार कैप्शन</h3>
+<div class="result" id="caption">अपना टाइम आएगा 😎🔥</div>
+<button onclick="caption()">नया कैप्शन</button>
+<button class="wa" onclick="shareResult('caption')">📲 WhatsApp</button>
+</section>
+
+<section class="card">
+<h3>🔥 आज का चैलेंज</h3>
+<div class="result" id="challenge">अपने दोस्त को हँसाओ 😂</div>
+<button onclick="challenge()">नया चैलेंज</button>
+<button class="wa" onclick="shareResult('challenge')">दोस्त को भेजें</button>
+</section>
+
+<section class="card">
+<h3>😊 अपना मूड चुनें</h3>
+<button onclick="mood('खुश')">😊 खुश</button>
+<button onclick="mood('बोर')">🥱 बोर</button>
+<button onclick="mood('उदास')">😔 उदास</button>
+<div class="result" id="moodResult">अपना मूड चुनिए!</div>
+</section>
+
+<section class="card">
+<h3>🫧 बबल मैजिक</h3>
+<p>वेबसाइट पर खाली जगह टच करें और रंगीन बुलबुले उड़ते देखें।</p>
+<button onclick="burst(innerWidth/2,innerHeight/2,30)">रंगीन बबल उड़ाओ!</button>
+</section>
+
+<section class="card">
+<h3>📲 अपनी वेबसाइट शेयर करें</h3>
+<p>अपने दोस्तों को जय हिंद यादव की वेबसाइट पर बुलाएँ।</p>
+<button class="wa" onclick="shareSite()">WhatsApp पर शेयर करें</button>
+</section>
+
+<section class="card">
+<h3>🔐 Admin Panel</h3>
+<p class="small">यह शुरुआती डेमो एडमिन पैनल है।</p>
+<div id="admin">
+<input id="pass" type="password" placeholder="Admin पासकोड">
+<button onclick="login()">लॉगिन करें</button>
+<div id="adminPanel">
+<h3>नमस्ते, जय हिंद यादव!</h3>
+<div class="result" id="visits">इस डिवाइस की विज़िट: —</div>
+<input id="announcement" maxlength="160" placeholder="वेबसाइट के लिए घोषणा लिखें">
+<button onclick="saveMessage()">घोषणा सेव करें</button>
+<button class="pink" onclick="logout()">लॉगआउट</button>
+<p class="small">ध्यान दें: यह डेमो पासकोड आधारित है, सुरक्षित ऑनलाइन एडमिन सिस्टम नहीं।</p>
 </div>
-
-<section id="jokes">
-<h2>😂 आज का जोक</h2>
-<div id="joke" class="card">टीचर: बताओ सबसे तेज़ क्या चलता है?<br>स्टूडेंट: छुट्टी की खबर! 😂</div>
-<p><button onclick="newJoke()">दूसरा जोक सुनाओ</button></p>
-</section>
-
-<section id="quiz">
-<h2>🧠 मज़ेदार सवाल</h2>
-<div id="question" class="card">ऐसी कौन सी चीज़ है जो पानी पीते ही मर जाती है?</div>
-<div id="answers" class="grid">
-<button onclick="answer(true)">आग 🔥</button>
-<button onclick="answer(false)">मछली 🐟</button>
 </div>
-<div id="quizresult"></div>
 </section>
 
-<section id="lucky">
-<h2>🎲 अपना लकी नंबर जानो</h2>
-<div id="result">बटन दबाकर नंबर निकालो!</div>
-<p><button onclick="lucky()">मेरा नंबर बताओ</button></p>
-</section>
-
-<section id="quotes">
-<h2>💬 आज की प्रेरणा</h2>
-<div id="quote" class="card">छोटी शुरुआत भी बड़े सपनों तक ले जा सकती है।</div>
-<p><button onclick="newQuote()">नई प्रेरणा</button></p>
+<section class="card">
+<h3>📢 घोषणा</h3>
+<div id="message" class="result">जय हिंद यादव की तरफ से सभी का स्वागत है! ❤️</div>
 </section>
 </main>
-<footer>❤️ Fun Zone | मज़े की दुनिया</footer>
+
+<footer>
+<strong>❤️ जय हिंद यादव ❤️</strong>
+<p>Masti Zone — मस्ती बाँटो, खुशियाँ फैलाओ!</p>
+</footer>
 
 <script>
-const jokes=[
-"टीचर: होमवर्क कहाँ है? छात्र: सर, होमवर्क तो किया था, लेकिन कॉपी को आराम चाहिए था! 😂",
-"दोस्त: पढ़ाई कैसी चल रही है? दूसरा: पंखा बंद है, इसलिए धीरे चल रही है! 😄",
-"टीचर: सबसे ज्यादा नशा किसमें है? छात्र: किताबों में, खोलते ही नींद आ जाती है! 😂"
+const captions=[
+"अपना टाइम आएगा 😎🔥",
+"सिंगल हूँ, खुश हूँ 😂",
+"मुस्कुराओ, दुनिया जलती है 😁",
+"दोस्ती हो तो ऐसी ❤️",
+"टेंशन छोड़ो, मस्ती जोड़ो 🎉"
 ];
-const quotes=[
-"हर दिन कुछ नया सीखो और आगे बढ़ो! 🚀",
-"छोटी शुरुआत भी बड़े सपनों तक ले जाती है। ❤️",
-"कोशिश करने वालों की कभी हार नहीं होती! 💪"
+const challenges=[
+"आज अपने दोस्त को हँसाओ 😂",
+"बेस्ट फ्रेंड को मैसेज करो ❤️",
+"10 सेकंड मजेदार डांस करो 💃",
+"किसी की तारीफ करो 😊",
+"दोस्त के साथ सेल्फी लो 📸"
 ];
-function newJoke(){document.getElementById('joke').textContent=jokes[Math.floor(Math.random()*jokes.length)]}
-function lucky(){document.getElementById('result').textContent='🎉 आपका आज का लकी नंबर: '+(Math.floor(Math.random()*100)+1)}
-function newQuote(){document.getElementById('quote').textContent=quotes[Math.floor(Math.random()*quotes.length)]}
-function answer(correct){document.getElementById('quizresult').textContent=correct?'🎉 सही जवाब!':'😊 सही जवाब है: आग 🔥'}
+
+function friend(){
+ const a=document.getElementById('n1').value.trim();
+ const b=document.getElementById('n2').value.trim();
+ if(!a||!b){document.getElementById('friendResult').textContent='दोनों नाम लिखिए!';return}
+ let n=0;
+ for(const c of [a.toLowerCase(),b.toLowerCase()].sort().join('-'))n=(n*31+c.charCodeAt(0))>>>0;
+ document.getElementById('friendResult').textContent=a+' ❤️ '+b+' = '+(n%101)+'% दोस्ती! (सिर्फ मजेदार गेम)';
+}
+function caption(){
+ document.getElementById('caption').textContent=captions[Math.floor(Math.random()*captions.length)];
+}
+function challenge(){
+ document.getElementById('challenge').textContent=challenges[Math.floor(Math.random()*challenges.length)];
+}
+function mood(m){
+ const messages={
+ 'खुश':'वाह! आपकी मुस्कान बनी रहे 😊',
+ 'बोर':'नया चैलेंज खेलो और दोस्त को बुलाओ 🎉',
+ 'उदास':'अपना ख्याल रखें ❤️ किसी दोस्त से बात करें।'
+ };
+ document.getElementById('moodResult').textContent=messages[m];
+}
+function shareSite(){
+ const text='🌈 जय हिंद यादव की Masti Zone वेबसाइट देखो! '+location.href;
+ window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+}
+function shareResult(id){
+ const text=document.getElementById(id).innerText+' | जय हिंद यादव की Masti Zone '+location.href;
+ window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+}
+function burst(x,y,count){
+ const colors=['#ff4d6d','#ffe66d','#8cf7ff','#baffc9','#ff9ff3','#fff'];
+ for(let i=0;i<count;i++){
+  const b=document.createElement('span');
+  const s=12+Math.random()*30;
+  b.className='bubble';b.style.width=s+'px';b.style.height=s+'px';
+  b.style.left=(x+(Math.random()-.5)*100)+'px';
+  b.style.top=(y+(Math.random()-.5)*50)+'px';
+  b.style.background=colors[Math.floor(Math.random()*colors.length)];
+  b.style.setProperty('--x',((Math.random()-.5)*180)+'px');
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),1800);
+ }
+}
+document.addEventListener('pointerdown',e=>{
+ if(!e.target.closest('button,input,a'))burst(e.clientX,e.clientY,7);
+});
+try{
+ let n=Number(localStorage.getItem('jhyVisits')||0)+1;
+ localStorage.setItem('jhyVisits',n);
+ document.getElementById('visits').textContent='इस डिवाइस की विज़िट: '+n;
+ const msg=localStorage.getItem('jhyMessage');
+ if(msg)document.getElementById('message').textContent=msg;
+}catch(e){}
+
+function login(){
+ if(document.getElementById('pass').value!=='JHY2026'){
+  alert('पासकोड गलत है');return;
+ }
+ document.getElementById('adminPanel').style.display='block';
+}
+function logout(){
+ document.getElementById('adminPanel').style.display='none';
+ document.getElementById('pass').value='';
+}
+function saveMessage(){
+ const value=document.getElementById('announcement').value.trim();
+ if(!value){alert('पहले घोषणा लिखिए');return}
+ document.getElementById('message').textContent=value;
+ try{localStorage.setItem('jhyMessage',value)}catch(e){}
+ alert('घोषणा इस डिवाइस पर सेव हुई है।');
+}
 </script>
 </body>
 </html>
