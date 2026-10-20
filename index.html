@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun Zone - मज़े की दुनिया</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#101124;color:white}
+header{background:#6c3cff;padding:22px 15px;text-align:center}
+header h1{margin:0;font-size:30px}
+header p{margin-bottom:0}
+main{max-width:650px;margin:auto;padding:18px}
+h2{color:#ffd166}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#222442;border-radius:15px;padding:18px 10px;text-align:center}
+.card a{display:block;color:white;text-decoration:none;font-size:17px}
+.emoji{font-size:35px;margin-bottom:10px}
+button{background:#6c3cff;color:white;border:0;padding:12px 18px;border-radius:9px;font-size:16px}
+#result{background:#222442;padding:20px;border-radius:12px;margin-top:15px;text-align:center}
+footer{text-align:center;padding:25px;color:#bbb}
+</style>
+</head>
+<body>
+<header>
+<h1>🎉 FUN ZONE 🎉</h1>
+<p>मज़े करो, हँसो और दोस्तों के साथ शेयर करो!</p>
+</header>
+<main>
+<h2>🔥 आज क्या ट्राई करोगे?</h2>
+<div class="grid">
+<div class="card"><div class="emoji">😂</div><a href="#jokes">मज़ेदार जोक्स</a></div>
+<div class="card"><div class="emoji">🧠</div><a href="#quiz">दिमागी क्विज़</a></div>
+<div class="card"><div class="emoji">🎲</div><a href="#lucky">लकी नंबर</a></div>
+<div class="card"><div class="emoji">💬</div><a href="#quotes">मोटिवेशन</a></div>
+</div>
+
+<section id="jokes">
+<h2>😂 आज का जोक</h2>
+<div id="joke" class="card">टीचर: बताओ सबसे तेज़ क्या चलता है?<br>स्टूडेंट: छुट्टी की खबर! 😂</div>
+<p><button onclick="newJoke()">दूसरा जोक सुनाओ</button></p>
+</section>
+
+<section id="quiz">
+<h2>🧠 मज़ेदार सवाल</h2>
+<div id="question" class="card">ऐसी कौन सी चीज़ है जो पानी पीते ही मर जाती है?</div>
+<div id="answers" class="grid">
+<button onclick="answer(true)">आग 🔥</button>
+<button onclick="answer(false)">मछली 🐟</button>
+</div>
+<div id="quizresult"></div>
+</section>
+
+<section id="lucky">
+<h2>🎲 अपना लकी नंबर जानो</h2>
+<div id="result">बटन दबाकर नंबर निकालो!</div>
+<p><button onclick="lucky()">मेरा नंबर बताओ</button></p>
+</section>
+
+<section id="quotes">
+<h2>💬 आज की प्रेरणा</h2>
+<div id="quote" class="card">छोटी शुरुआत भी बड़े सपनों तक ले जा सकती है।</div>
+<p><button onclick="newQuote()">नई प्रेरणा</button></p>
+</section>
+</main>
+<footer>❤️ Fun Zone | मज़े की दुनिया</footer>
+
+<script>
+const jokes=[
+"टीचर: होमवर्क कहाँ है? छात्र: सर, होमवर्क तो किया था, लेकिन कॉपी को आराम चाहिए था! 😂",
+"दोस्त: पढ़ाई कैसी चल रही है? दूसरा: पंखा बंद है, इसलिए धीरे चल रही है! 😄",
+"टीचर: सबसे ज्यादा नशा किसमें है? छात्र: किताबों में, खोलते ही नींद आ जाती है! 😂"
+];
+const quotes=[
+"हर दिन कुछ नया सीखो और आगे बढ़ो! 🚀",
+"छोटी शुरुआत भी बड़े सपनों तक ले जाती है। ❤️",
+"कोशिश करने वालों की कभी हार नहीं होती! 💪"
+];
+function newJoke(){document.getElementById('joke').textContent=jokes[Math.floor(Math.random()*jokes.length)]}
+function lucky(){document.getElementById('result').textContent='🎉 आपका आज का लकी नंबर: '+(Math.floor(Math.random()*100)+1)}
+function newQuote(){document.getElementById('quote').textContent=quotes[Math.floor(Math.random()*quotes.length)]}
+function answer(correct){document.getElementById('quizresult').textContent=correct?'🎉 सही जवाब!':'😊 सही जवाब है: आग 🔥'}
+</script>
+</body>
+</html>
