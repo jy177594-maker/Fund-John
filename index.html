@@ -1,4 +1,692 @@
+!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#24104f">
+  <meta name="description" content="Masti Zone - Hindi Shayari, YouTube Status Videos, Jokes, Friendship Games aur WhatsApp Sharing.">
+  <title>Masti Zone ❤️ | जय हिंद यादव</title>
 
+  <style>
+    :root {
+      --bg: #100c27;
+      --panel: #201741;
+      --pink: #ff4da6;
+      --purple: #9c6bff;
+      --yellow: #ffe66d;
+      --text: #fff9ff;
+      --muted: #d6cce9;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at top left, #48206c 0, transparent 40%),
+        radial-gradient(ellipse at bottom right, #192e63 0, transparent 40%),
+        var(--bg);
+      font-family: system-ui, -apple-system, "Noto Sans Devanagari",
+        "Mangal", sans-serif;
+      line-height: 1.6;
+    }
+
+    button, input { font: inherit; }
+
+    button {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px 14px;
+      background: #160d2bed;
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #ffffff20;
+    }
+
+    .brand {
+      margin: 0;
+      font-size: clamp(21px, 5vw, 32px);
+      font-weight: 900;
+      text-align: center;
+      background: linear-gradient(90deg, #ffda79, #ff55b7, #8edfff, #b7ff9d, #ffda79);
+      background-size: 300% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: rainbow 5s linear infinite;
+    }
+
+    @keyframes rainbow {
+      to { background-position: 300% center; }
+    }
+
+    .tagline {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0 2px;
+      scrollbar-width: none;
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 99px;
+      background: #ffffff13;
+      border: 1px solid #ffffff18;
+      font-size: 13px;
+    }
+
+    .hero {
+      padding: 32px 16px 22px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: clamp(26px, 7vw, 43px);
+      line-height: 1.2;
+      margin: 10px 0;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffdd78, #ff71c4, #a6caff);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero p { color: var(--muted); }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      border: 0;
+      border-radius: 13px;
+      padding: 10px 14px;
+      font-weight: 750;
+      color: white;
+      background: linear-gradient(120deg, #8d4dff, #f33f9c);
+      text-decoration: none;
+      box-shadow: 0 5px 18px #0002;
+    }
+
+    .btn.secondary {
+      background: #ffffff12;
+      border: 1px solid #ffffff26;
+      box-shadow: none;
+    }
+
+    .btn.whatsapp {
+      background: #168e50;
+    }
+
+    .btn.small {
+      font-size: 13px;
+      padding: 8px 11px;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: auto;
+      padding: 18px 14px 28px;
+      scroll-margin-top: 140px;
+    }
+
+    .section-title {
+      font-size: 23px;
+      margin: 0 0 6px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 16px;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, #ffffff12, #ffffff06);
+      border: 1px solid #ffffff1c;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 12px 35px #0002;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+    }
+
+    .shayari-card {
+      min-width: 0;
+      border-radius: 17px;
+      padding: 15px;
+      background: linear-gradient(145deg, #48245f, #20234e);
+      border: 1px solid #ffffff20;
+    }
+
+    .shayari-card p {
+      white-space: pre-line;
+      margin: 5px 0 14px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .video-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .video-card {
+      overflow: hidden;
+      border-radius: 19px;
+      background: #1d1636;
+      border: 1px solid #ffffff20;
+    }
+
+    .video-title {
+      padding: 12px 13px 3px;
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .video-note {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 0 13px 10px;
+      margin: 0;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-height: 620px;
+      border: 0;
+      display: block;
+      background: #080612;
+    }
+
+    .video-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    input[type="text"] {
+      min-width: 0;
+      flex: 1;
+      padding: 11px 12px;
+      border-radius: 12px;
+      color: white;
+      background: #ffffff10;
+      border: 1px solid #ffffff35;
+      outline: none;
+    }
+
+    .result {
+      margin-top: 10px;
+      color: #ffe9a0;
+      white-space: pre-line;
+    }
+
+    .mood-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mood-buttons button {
+      border: 1px solid #ffffff2a;
+      background: #ffffff10;
+      color: white;
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .challenge {
+      color: #ffeaa0;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 8px 0 14px;
+    }
+
+    .bubble {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99;
+      font-size: 23px;
+      animation: floatUp 1.3s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      from { opacity: 1; transform: translateY(0) scale(.7); }
+      to { opacity: 0; transform: translateY(-100px) scale(1.5); }
+    }
+
+    footer {
+      padding: 28px 15px 40px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid #ffffff20;
+      font-size: 13px;
+    }
+
+    .notice {
+      border-left: 3px solid var(--yellow);
+      padding: 10px 12px;
+      background: #ffe66d10;
+      color: #f6eecf;
+      font-size: 13px;
+      border-radius: 5px 12px 12px 5px;
+    }
+
+    @media (min-width: 700px) {
+      .video-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+      .video-frame { aspect-ratio: 9 / 16; }
+      .hero { padding: 50px 18px 35px; }
+    }
+
+    @media (max-width: 380px) {
+      .grid { grid-template-columns: 1fr; }
+      .btn { padding: 9px 11px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <h1 class="brand">👑 जय हिंद यादव • Masti Zone 👑</h1>
+    <p class="tagline">शायरी ❤️ दोस्ती 🤝 जोक्स 😂 वीडियो 🎬</p>
+    <nav aria-label="मुख्य मेन्यू">
+      <a href="#videos">🎬 वीडियो</a>
+      <a href="#shayari">💖 शायरी</a>
+      <a href="#jokes">😂 जोक्स</a>
+      <a href="#friendship">🤝 दोस्ती टेस्ट</a>
+      <a href="#challenge">🔥 चैलेंज</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>✨ स्वागत है आपके अपने मस्ती अड्डे पर ✨</div>
+      <h2>हर स्क्रॉल पर <span class="gradient-text">नई मस्ती!</span></h2>
+      <p>दिल को छूने वाली शायरी, मज़ेदार जोक्स और YouTube स्टेटस वीडियो।</p>
+      <a class="btn" href="#videos">🎬 वीडियो देखना शुरू करें</a>
+      <p style="font-size:12px">👇 नीचे स्क्रॉल करें और अपनी पसंद शेयर करें 👇</p>
+    </section>
+
+    <section class="section" id="videos">
+      <h2 class="section-title">🎬 शायरी वीडियो फ़ीड</h2>
+      <p class="section-desc">
+        वीडियो चलाएँ, पसंद करें और लिंक WhatsApp पर शेयर करें।
+      </p>
+
+      <div class="notice">
+        नए वीडियो जोड़ने के लिए नीचे कोड में videos सूची अपडेट करें।
+        ये सूची अपने-आप हर मिनट अपडेट नहीं होती।
+      </div>
+
+      <div class="search-row">
+        <a class="btn small" target="_blank" rel="noopener"
+           href="https://www.youtube.com/results?search_query=Hindi+shayari+status+shorts">
+          🔎 और शायरी वीडियो खोजें
+        </a>
+        <a class="btn small secondary" target="_blank" rel="noopener"
+           href="https://www.youtube.com/results?search_query=Hindi+attitude+shayari+shorts">
+          😎 एटीट्यूड
+        </a>
+      </div>
+
+      <div class="video-list" id="videoList"></div>
+
+      <p class="section-desc" style="margin-top:12px">
+        नोट: WhatsApp शेयर बटन वीडियो का लिंक शेयर करता है, वीडियो फ़ाइल नहीं।
+      </p>
+    </section>
+
+    <section class="section" id="shayari">
+      <h2 class="section-title">💖 दिल से निकली शायरी</h2>
+      <p class="section-desc">कॉपी करें या दोस्तों के साथ शेयर करें।</p>
+      <div class="grid" id="shayariList"></div>
+    </section>
+
+    <section class="section" id="jokes">
+      <h2 class="section-title">😂 हँसी का डोज़</h2>
+      <div class="panel">
+        <p id="jokeText">टीचर: बताओ, सबसे तेज़ क्या चलता है? छात्र: छुट्टी की घंटी सुनकर मेरा बैग! 😂</p>
+        <button class="btn" id="newJoke">🤣 दूसरा जोक</button>
+        <button class="btn whatsapp" id="shareJoke">📲 जोक शेयर करें</button>
+      </div>
+    </section>
+
+    <section class="section" id="friendship">
+      <h2 class="section-title">🤝 दोस्ती टेस्ट</h2>
+      <div class="panel">
+        <p>अपने दोस्त का नाम डालें और मज़ेदार दोस्ती मैसेज पाएँ।</p>
+        <div class="search-row">
+          <input id="friendName" type="text" maxlength="35"
+                 placeholder="दोस्त का नाम लिखें">
+          <button class="btn" id="friendTest">टेस्ट करें 💖</button>
+        </div>
+        <div class="result" id="friendResult" aria-live="polite"></div>
+        <p class="section-desc">यह सिर्फ मनोरंजन के लिए है, असली स्कोर नहीं।</p>
+      </div>
+    </section>
+
+    <section class="section" id="captions">
+      <h2 class="section-title">✍️ स्टेटस और कैप्शन</h2>
+      <div class="panel">
+        <div class="mood-buttons">
+          <button data-caption="love">❤️ प्यार</button>
+          <button data-caption="sad">💔 सैड</button>
+          <button data-caption="attitude">😎 एटीट्यूड</button>
+          <button data-caption="friend">🤝 दोस्ती</button>
+        </div>
+        <p id="captionText" class="challenge">अपना मूड चुनिए!</p>
+        <button class="btn" id="copyCaption">📋 कैप्शन कॉपी करें</button>
+        <button class="btn whatsapp" id="shareCaption">📲 शेयर करें</button>
+      </div>
+    </section>
+
+    <section class="section" id="challenge">
+      <h2 class="section-title">🔥 आज का मस्ती चैलेंज</h2>
+      <div class="panel">
+        <div id="challengeText" class="challenge">
+          आज किसी एक दोस्त को दिल से तारीफ़ वाला मैसेज भेजें। ❤️
+        </div>
+        <button class="btn" id="newChallenge">🎲 नया चैलेंज</button>
+        <button class="btn whatsapp" id="shareChallenge">📲 शेयर करें</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">📲 WhatsApp पर शेयर कैसे होगा?</h2>
+      <div class="panel">
+        <p>• <b>शेयर करें:</b> लिंक WhatsApp पर भेज सकते हैं।</p>
+        <p>• <b>स्टेटस लगाएँ:</b> शेयर मेन्यू में WhatsApp दिखे तो उसे चुनें।</p>
+        <p class="section-desc">
+          वेबसाइट सीधे आपके WhatsApp Status पर पोस्ट नहीं कर सकती।
+          YouTube लिंक शेयर करने से वीडियो लिंक जाता है, डाउनलोड की हुई
+          वीडियो फ़ाइल नहीं। वीडियो को स्टेटस में लगाने के लिए ग्राहक को
+          WhatsApp के समर्थित विकल्प या अपने फोन में वीडियो फ़ाइल की ज़रूरत हो सकती है।
+        </p>
+        <button class="btn whatsapp" id="shareSite">💚 Masti Zone शेयर करें</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="font-size:22px">👑 जय हिंद यादव 👑</div>
+    <p>आपकी अपनी Masti Zone ❤️</p>
+    <p>वीडियो संबंधित अधिकार उनके मूल निर्माताओं के पास हैं।</p>
+  </footer>
+
+  <script>
+    /*
+      VIDEO LIST UPDATE:
+      1. नीचे videos सूची में नई लाइन जोड़ें।
+      2. YouTube URL से वीडियो ID लें।
+      उदाहरण: youtube.com/watch?v=AbCd1234 -> ID AbCd1234
+      Shorts URL: youtube.com/shorts/AbCd1234 -> ID AbCd1234
+      3. शीर्षक और ID भरकर GitHub में Commit changes करें।
+    */
+    const videos = [
+      {
+        title: "🥀 Sad Shayari Status",
+        id: "pU-HNYpE9Ak",
+        description: "दिल छूने वाली सैड शायरी"
+      },
+      {
+        title: "❤️ Love Shayari Status",
+        id: "cHF9UvigOgU",
+        description: "मोहब्बत और रोमांटिक शायरी"
+      }
+    ];
+
+    const shayaris = [
+      {
+        title: "❤️ मोहब्बत",
+        text: "तेरी मुस्कान मेरी पहचान बन जाए,\nतेरी खुशी मेरी जान बन जाए।\nरहे साथ तेरा हर जन्म में,\nमेरी दुनिया तेरा जहान बन जाए।"
+      },
+      {
+        title: "💔 दिल की बात",
+        text: "कुछ बातें दिल में रह जाती हैं,\nकुछ यादें आँखों में बह जाती हैं।\nहर किसी को नहीं मिलता अपना,\nकुछ कहानियाँ अधूरी रह जाती हैं।"
+      },
+      {
+        title: "😎 एटीट्यूड",
+        text: "हमारी पहचान हमारे काम से है,\nबातों से नहीं, अपने अंदाज़ से है।\nजो दिल में हैं, वही ज़ुबान पर,\nहमारी दोस्ती भी अपने उसूलों के साथ है।"
+      },
+      {
+        title: "🤝 दोस्ती",
+        text: "दोस्ती वो नहीं जो जान देती है,\nदोस्ती वो है जो मुस्कान देती है।\nसच्चा दोस्त साथ हो अगर,\nमुश्किल भी आसान लगती है।"
+      },
+      {
+        title: "🌟 ज़िंदगी",
+        text: "रास्ते मुश्किल हों तो क्या हुआ,\nहौसला अपने पास होना चाहिए।\nमंज़िल एक दिन मिल ही जाएगी,\nबस सफ़र पर विश्वास होना चाहिए।"
+      },
+      {
+        title: "🌹 यादें",
+        text: "कुछ लोग दूर होकर भी पास रहते हैं,\nदिल के हर कोने में खास रहते हैं।\nभुलाना आसान नहीं होता उन्हें,\nजो हर धड़कन में एहसास रहते हैं।"
+      }
+    ];
+
+    const jokes = [
+      "टीचर: होमवर्क कहाँ है? छात्र: मैडम, होमवर्क घर पर है, इसलिए तो उसे होमवर्क कहते हैं! 😂",
+      "दोस्त: जिम क्यों नहीं जाता? मैं: शरीर पहले से फिट है, बस आलस थोड़ा मोटा है! 🤣",
+      "मम्मी: फोन छोड़ दो! बेटा: रख दिया। मम्मी: कहाँ? बेटा: हाथ में ही तो है! 😂",
+      "टीचर: सबसे ज़्यादा नींद कहाँ आती है? छात्र: ऑनलाइन क्लास में! 😴",
+      "दोस्त: तेरी याददाश्त कैसी है? मैं: बहुत अच्छी... बस याद नहीं कब से! 😄"
+    ];
+
+    const captions = {
+      love: [
+        "तुम हो तो हर पल खास है। ❤️",
+        "दिल की हर धड़कन में बस तुम्हारा नाम। 🌹",
+        "मोहब्बत शब्द नहीं, एक एहसास है। 💖"
+      ],
+      sad: [
+        "मुस्कान के पीछे भी कई कहानियाँ होती हैं। 💔",
+        "कुछ खामोशियाँ बहुत कुछ कह जाती हैं। 🥀",
+        "वक़्त बदलता है, यादें नहीं।"
+      ],
+      attitude: [
+        "अपना अंदाज़ ही अपनी पहचान है। 😎",
+        "हम अपनी कहानी के खुद हीरो हैं। 🔥",
+        "इज़्ज़त दो, इज़्ज़त लो। बाकी सब छोड़ो।"
+      ],
+      friend: [
+        "दोस्ती दिल से हो तो दूरी मायने नहीं रखती। 🤝",
+        "यार कम हों, पर सच्चे हों। ❤️",
+        "दोस्ती में हिसाब नहीं, एहसास होता है।"
+      ]
+    };
+
+    const challenges = [
+      "आज एक दोस्त की दिल से तारीफ़ करें। ❤️",
+      "किसी अपने को बिना वजह धन्यवाद कहें। 🙌",
+      "आज किसी को हँसाने की कोशिश करें। 😂",
+      "अपनी एक अच्छी याद किसी दोस्त के साथ शेयर करें। 📸",
+      "आज अपने लक्ष्य के लिए एक छोटा कदम उठाएँ। 🔥",
+      "किसी पुराने दोस्त को हालचाल पूछने का मैसेज भेजें। 🤝"
+    ];
+
+    const $ = (id) => document.getElementById(id);
+
+    function makeElement(tag, className, text) {
+      const el = document.createElement(tag);
+      if (className) el.className = className;
+      if (text !== undefined) el.textContent = text;
+      return el;
+    }
+
+    function safeYouTubeId(id) {
+      return /^[a-zA-Z0-9_-]{11}$/.test(id);
+    }
+
+    function renderVideos() {
+      const list = $("videoList");
+      list.replaceChildren();
+
+      videos.forEach((video) => {
+        const card = makeElement("article", "video-card");
+        const title = makeElement("h3", "video-title", video.title);
+        const note = makeElement("p", "video-note", video.description || "YouTube वीडियो");
+
+        card.append(title, note);
+
+        if (safeYouTubeId(video.id)) {
+          const iframe = document.createElement("iframe");
+          iframe.className = "video-frame";
+          iframe.src = "https://www.youtube-nocookie.com/embed/" +
+            encodeURIComponent(video.id);
+          iframe.title = video.title;
+          iframe.loading = "lazy";
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen = true;
+          card.append(iframe);
+        } else {
+          const msg = makeElement("p", "video-note",
+            "इस वीडियो की ID सही नहीं है। सूची में YouTube ID जाँचें।");
+          card.append(msg);
+        }
+
+        const actions = makeElement("div", "video-actions");
+        const watch = makeElement("a", "btn small", "▶ YouTube पर देखें");
+        watch.href = "https://www.youtube.com/watch?v=" + encodeURIComponent(video.id);
+        watch.target = "_blank";
+        watch.rel = "noopener";
+
+        const share = makeElement("button", "btn small whatsapp", "📲 WhatsApp शेयर");
+        share.type = "button";
+        share.addEventListener("click", () => {
+          shareWhatsApp(video.title + "\n" +
+            "https://www.youtube.com/watch?v=" + video.id);
+        });
+
+        const status = makeElement("button", "btn small secondary", "📤 स्टेटस/शेयर");
+        status.type = "button";
+        status.addEventListener("click", () => {
+          shareNative(
+            video.title + " — Masti Zone",
+            "https://www.youtube.com/watch?v=" + video.id
+          );
+        });
+
+        actions.append(watch, share, status);
+        card.append(actions);
+        list.append(card);
+      });
+    }
+
+    function renderShayari() {
+      const list = $("shayariList");
+      list.replaceChildren();
+
+      shayaris.forEach((item) => {
+        const card = makeElement("article", "shayari-card");
+        card.append(makeElement("strong", "", item.title));
+        card.append(makeElement("p", "", item.text));
+
+        const actions = makeElement("div", "card-actions");
+        const copy = makeElement("button", "btn small", "📋 कॉपी");
+        copy.type = "button";
+        copy.addEventListener("click", () => copyText(item.text));
+
+        const share = makeElement("button", "btn small whatsapp", "📲 शेयर");
+        share.type = "button";
+        share.addEventListener("click", () =>
+          shareWhatsApp(item.title + "\n" + item.text + "\n" + location.href)
+        );
+
+        actions.append(copy, share);
+        card.append(actions);
+        list.append(card);
+      });
+    }
+
+    async function copyText(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const area = document.createElement("textarea");
+          area.value = text;
+          area.style.position = "fixed";
+          area.style.opacity = "0";
+          document.body.append(area);
+          area.select();
+          const success = document.execCommand("copy");
+          area.remove();
+          if (!success) throw new Error("copy failed");
+        }
+        alert("कॉपी हो गया! ❤️");
+      } catch (error) {
+        window.prompt("यह टेक्स्ट कॉपी करें:", text);
+      }
+    }
+
+    function shareWhatsApp(text) {
+      const url = "https://wa.me/?text=" + encodeURIComponent(text);
+      window.open(url, "_blank", "noopener");
+    }
+
+    async function shareNative(title, url) {
+      const data = {
+        title: title,
+        text: title + "\nMasti Zone",
+        url: url
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(data);
+        } catch (error) {
+          if (error.name !== "AbortError") shareWhatsApp(title + "\n" + url);
+        }
+      } else {
+        shareWhatsApp(title + "\n" + url);
+      }
+    }
+
+    $("newJoke").addEventListener("click", () => {
+      const old = $("jokeText").textContent;
+      let next = old;
 <!DOCTYPE html>
 <html lang="hi">
 <head>
